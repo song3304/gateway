@@ -21,7 +21,7 @@ class ErrorMsg extends MsgHandleBase
         
         //todo: 根据业务需要检测相关数据
         //todo: 根据业务需要修改json数据
-        Gateway::sendToClient(self::output(array('code' => $code, 'msg' => '')));
+        Gateway::sendToClient($client_id, self::output(array('code' => $code, 'msg' => '')));
     }
 
 }

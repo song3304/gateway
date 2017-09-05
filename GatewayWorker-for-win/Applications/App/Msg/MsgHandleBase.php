@@ -15,13 +15,13 @@ namespace App\Msg;
  */
 abstract class MsgHandleBase
 {
-    abstract static function handle($client_id, $json);
+    static function handle($client_id, $json){}
     
     //消息格式组装
     static public function output($json) {
         if (!is_string($json)) {
             $json = json_encode($json);
         }
-        return $json.'\r\n';
+        return "$json\r\n";
     }
 }

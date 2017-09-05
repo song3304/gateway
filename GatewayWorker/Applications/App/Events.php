@@ -51,8 +51,9 @@ class Events
    public static function onMessage($client_id, $message)
    {
         // 向所有人发送 
-        Gateway::sendToAll("$message\r\n");
-//        MsgHandler::dispatch($client_id, $message);
+//        Gateway::sendToAll("$message\r\n");
+//       echo $message;
+        MsgHandler::dispatch($client_id, $message);
    }
    
    /**
