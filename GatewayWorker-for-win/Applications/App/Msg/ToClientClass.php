@@ -21,7 +21,7 @@ use App\Msg\ErrorMsg;
 class ToClientClass extends MsgHandleBase
 {
 
-    static public function handle($client_id, $json)
+    static public function handle($client_id, $json, $passback = true)
     {
         //todo: 根据业务需要检测相关数据
         //todo: 根据业务需要修改json数据

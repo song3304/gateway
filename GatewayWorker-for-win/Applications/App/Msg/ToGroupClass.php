@@ -5,23 +5,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 namespace App\Msg;
 
 use \GatewayWorker\Lib\Gateway;
-
 use App\Msg\MsgHandleBase;
 use App\Msg\ErrorMsg;
+
 /**
  * Description of ToAllClass
  *
  * @author Xp
  */
-class ToGroupClass extends MsgHandleBase
-{
-    static public function handle($client_id, $json) {
-        
+class ToGroupClass extends MsgHandleBase {
+
+    static public function handle($client_id, $json, $passback = true) {
+
         //todo: 根据业务需要检测相关数据
         //todo: 根据业务需要修改json数据
-        Gateway::sendToAll(self::output($json));
+        if (!$passback)
+            Gateway::sendToAll(self::output($json), NULL, [$client_id]);    //不要回传
+        else
+            Gateway::sendToAll(self::output($json));
     }
+
 }

@@ -17,7 +17,7 @@ use \GatewayWorker\Lib\Gateway;
  */
 class ErrorMsg extends MsgHandleBase
 {
-    static public function handle($client_id, $code) {
+    static public function handle($client_id, $code, $passback = true) {
         
         //todo: 根据业务需要检测相关数据
         //todo: 根据业务需要修改json数据

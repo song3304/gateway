@@ -15,7 +15,7 @@ namespace App\Msg;
  */
 abstract class MsgHandleBase
 {
-    static function handle($client_id, $json){}
+    static function handle($client_id, $json, $passback = true){}
     
     //消息格式组装
     static public function output($json) {

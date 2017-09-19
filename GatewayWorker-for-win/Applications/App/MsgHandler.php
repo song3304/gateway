@@ -22,6 +22,7 @@ class MsgHandler
     public static function dispatch($client_id, $message) {
         //判断消息类型，并分发给相应的消息处理类
         $json = json_decode($message);
+
         if (!$json || !isset($json->id)) {
             //消息错误
             return ErrorMsg::handle($client_id, MsgIds::MSG_FORMAT_ERROR);
@@ -32,7 +33,10 @@ class MsgHandler
                 ToAllClass::handle($client_id, $json);
                 break;
             case MsgIds::MESSAGE_GATEWAY_TO_GROUP :
-                ToGroupClass::handle($client_id, $json);
+                if (isset($json->passback)) //不要回传，即发送过来的客户端不关心这个数据
+                    ToGroupClass::handle($client_id, $json, FALSE);
+                else 
+                    ToGroupClass::handle($client_id, $json);
                 break;
             case MsgIds::MESSAGE_GATEWAY_TO_CLIENT :
                 ToClientClass::handle($client_id, $json);
