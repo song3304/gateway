@@ -38,7 +38,7 @@ class Events
     public static function onConnect($client_id)
     {
         // 向当前client_id发送数据 
-//        Gateway::sendToClient($client_id, "Hello $client_id\r\n");
+        Gateway::sendToClient($client_id, "Hello $client_id\r\n");
         // 向所有人发送
         Gateway::sendToAll("$client_id login\r\n");
     }
@@ -51,8 +51,8 @@ class Events
    public static function onMessage($client_id, $message)
    {
         // 向所有人发送 
-//        Gateway::sendToAll("$message\r\n");
-//       echo $message;
+        // todo:后续信息量大的时候，将推送服务和后台数据抓取服务加入不同的组，可以减少信息风暴
+        // 那么信息发送的时候就是sendToGroup
         MsgHandler::dispatch($client_id, $message);
    }
    
