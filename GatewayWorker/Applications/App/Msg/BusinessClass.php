@@ -26,7 +26,6 @@ class BusinessClass extends MsgHandleBase {
             Gateway::sendToClient($client_id, 'join success');
         } else if ($json->business_type == 'firstLogin' && isset($json->client) && !empty($json->client)){
             //某用户第一次连接，需要获取一次实时信息给他
-            print_r($json);
             Gateway::sendToGroup('TaskServer', self::output($json));
         }
     }
