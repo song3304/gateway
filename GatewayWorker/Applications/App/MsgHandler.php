@@ -11,6 +11,7 @@ use App\MsgIds;
 use App\Msg\ToClientClass;
 use App\Msg\ToGroupClass;
 use App\Msg\ToAllClass;
+use App\Msg\BusinessClass;
 /**
  * Description of MsgHandler
  *
@@ -42,6 +43,7 @@ class MsgHandler
                 ToClientClass::handle($client_id, $json);
                 break;
             case MsgIds::MESSAGE_GATEWAY_BUSSINESS :
+                BusinessClass::handle($client_id, $json);
                 break;
             default :
                 //未定义的消息，不做处理

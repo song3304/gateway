@@ -26,7 +26,7 @@ class ToClientClass extends MsgHandleBase
         //todo: 根据业务需要检测相关数据
         //todo: 根据业务需要修改json数据
         
-        Gateway::sendToAll(self::output($json));
+        Gateway::sendToGroup('SubNotify', self::output($json));
     }
 
 }

@@ -24,9 +24,9 @@ class ToGroupClass extends MsgHandleBase {
         //todo: 根据业务需要检测相关数据
         //todo: 根据业务需要修改json数据
         if (!$passback)
-            Gateway::sendToAll(self::output($json), NULL, [$client_id]);    //不要回传
+            Gateway::sendToGroup('SubNotify', self::output($json), [$client_id]);  //不要回传
         else
-            Gateway::sendToAll(self::output($json));
+            Gateway::sendToGroup('SubNotify', self::output($json));
     }
 
 }
