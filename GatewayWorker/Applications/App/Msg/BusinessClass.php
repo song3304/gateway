@@ -18,15 +18,15 @@ use App\Msg\ErrorMsg;
  * @author Xp
  */
 class BusinessClass extends MsgHandleBase {
-
     static public function handle($client_id, $json, $passback = true) {
         //加入组
         if ($json->business_type == 'JoinGroup' && isset($json->group) && !empty($json->group)) {
             Gateway::joinGroup($client_id, $json->group);
             Gateway::sendToClient($client_id, 'join success');
-        } else if ($json->business_type == 'firstLogin' && isset($json->client) && !empty($json->client)){
+        } else if ($json->business_type == 'firstLogin' && !empty($json->client) && !empty($json->catalog_id)){
+            $json->notify_client = $client_id;
             //某用户第一次连接，需要获取一次实时信息给他
-            Gateway::sendToGroup('TaskServer', self::output($json));
+            Gateway::sendToGroup('TaskServer_'.$json->catalog_id, self::output($json));
         }
     }
 

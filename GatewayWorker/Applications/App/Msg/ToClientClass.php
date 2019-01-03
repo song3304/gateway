@@ -25,8 +25,12 @@ class ToClientClass extends MsgHandleBase
     {
         //todo: 根据业务需要检测相关数据
         //todo: 根据业务需要修改json数据
-        
-        Gateway::sendToGroup('SubNotify', self::output($json));
+        if(isset($json->stype) && $json->stype=='firstLogin'){//首次登录发送请求
+            $nofity_client = $json->notify_fd;
+            Gateway::sendToClient($nofity_client,self::output($json));
+        }else{
+            Gateway::sendToGroup('SubNotify', self::output($json));
+        }
     }
 
 }
